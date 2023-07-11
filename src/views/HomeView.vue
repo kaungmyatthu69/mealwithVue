@@ -18,9 +18,7 @@ console.log(meals.value)
   <h1 v-if="loading">loading ......</h1>
   <div class="flex flex-wrap justify-center gap-5">
     <div v-if="!loading" v-for="(meal,index) in meals" :key="index" >
-
       <MealCart :meal="meal" />
-
     </div>
   </div>
 
