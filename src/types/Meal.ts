@@ -3,6 +3,7 @@
     strMealThumb : string,
     idMeal : string
 }
+
  export type detailMeal ={
      idMeal: string;
      strMeal: string;
@@ -58,3 +59,12 @@
      strCreativeCommonsConfirmed: string | null;
      dateModified: string | null;
  }
+
+export type category ={
+    idCategory: string,
+    strCategory: string,
+    strCategoryThumb: string,
+    strCategoryDescription:string
+
+}
+

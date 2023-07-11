@@ -11,6 +11,6 @@
 import {useMealStore} from "@/stores/meal";
 import {storeToRefs} from "pinia";
 const mealStore = useMealStore();
-import MealCart from "@/components/MealCart.vue";
+import MealCart from "@/components/HomePage/MealCart.vue";
 const {FavList } = storeToRefs(mealStore)
 </script>
