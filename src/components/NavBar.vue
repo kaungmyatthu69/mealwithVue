@@ -11,12 +11,13 @@
         <div class="relative"><Cart/>  <span class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-black  border-white rounded-full -top-2 -right-2 dark:border-gray-900">{{AddToCartList.length}}</span> </div>
       </div>
 
+
     </div>
   </div>
 
 </template>
 <script setup lang="ts">
-import router from "@/router";
+
 import Cart from "vue-material-design-icons/Cart.vue"
 import {useMealStore} from "@/stores/meal";
 import {storeToRefs} from "pinia";

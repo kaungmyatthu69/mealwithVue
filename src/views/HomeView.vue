@@ -6,8 +6,8 @@ import MealCart from "@/components/HomePage/MealCart.vue";
 import Herosection from "@/components/HomePage/Herosection.vue";
 import search from  "vue-material-design-icons/Magnify.vue"
 const mealStore = useMealStore()
-const {meals} = storeToRefs(mealStore)
-const searchbyName =ref('')
+const {meals,searchbyName} = storeToRefs(mealStore)
+
 onMounted(()=>{
   mealStore.getMeals()
 })
@@ -24,7 +24,9 @@ onMounted(()=>{
   </div>
 
   <div class="flex flex-wrap justify-center gap-5">
+
     <div  v-for="(meal,index) in meals" :key="index" >
+
       <MealCart :meal="meal" />
     </div>
   </div>
