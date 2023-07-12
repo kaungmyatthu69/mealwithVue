@@ -29,7 +29,7 @@ import type {meal} from "@/types/Meal";
 const props=defineProps({
   CurouselData:{
     require:true,
-    type:[] as meal[]
+    type:Array as meal[]
   }
 })
 
