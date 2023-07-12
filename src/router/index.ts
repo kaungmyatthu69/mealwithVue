@@ -5,6 +5,7 @@ import HomeView from '../views/HomeView.vue'
 // @ts-ignore
 
 import FavListView from "@/views/FavListView.vue";
+// @ts-ignore
 import MealDetailView from "@/views/MealDetailView.vue";
 
 const router = createRouter({

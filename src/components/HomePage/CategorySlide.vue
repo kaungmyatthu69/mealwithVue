@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, watch} from "vue";
 import {useMealStore} from "@/stores/meal";
 import {storeToRefs} from "pinia";
 

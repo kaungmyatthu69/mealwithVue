@@ -1,9 +1,9 @@
 <template>
   <h1>Herosection</h1>
 <Curousel :CurouselData="getSomeMeals" />
-  <div class="flex flex-col justify-center items-center mt-10">
+  <div class=" md:flex-col justify-center items-center mt-10 hidden md:flex">
     <h1 class="text-3xl font-bold">Categories</h1>
-    <CategorySlide/>
+    <CategorySlide  />
   </div>
 
 

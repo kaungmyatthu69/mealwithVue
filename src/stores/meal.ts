@@ -12,7 +12,8 @@ export const useMealStore = defineStore('mealStore', {
         detailsMeal: <detailMeal[]>[],
         Category: <category[]>[],
         SelectedCategory: '',
-        searchbyName: ''
+        searchbyName: '',
+        isOpenDrawer :<boolean> false
     }),
     getters: {
         Ingredient(state: any) {
@@ -25,7 +26,11 @@ export const useMealStore = defineStore('mealStore', {
             return ingredient;
         },
         getSomeMeals(state: any) {
-            return state.meals.slice(0, 8)
+            if(state.meals?.length>8){
+                return state.meals.slice(0, 8)
+            }else {
+                return  state.meals?.slice(0,state.meals.length+1)
+            }
         }
     },
     actions: {
@@ -35,6 +40,7 @@ export const useMealStore = defineStore('mealStore', {
             this.meals = vegetarian.meals
         },
         async getDetailsMealById(id: number | string) {
+            this.detailsMeal=[]
             const res = await fetch("https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id)
             const meal = await res.json();
             this.detailsMeal = meal.meals
@@ -68,7 +74,9 @@ export const useMealStore = defineStore('mealStore', {
         },
         RemoveFromCart(meal: meal) {
             this.AddToCartList = this.AddToCartList.filter((item: any) => item.idMeal !== meal.idMeal)
-
+        },
+        toggleDrawer(){
+            this.isOpenDrawer= !this.isOpenDrawer
         }
     }
 })
