@@ -3,13 +3,13 @@
   <RouterLink to="/">
     <Button bg-clr="bg-green-400" >Back</Button>
   </RouterLink>
-  <div>
-    <div v-for="meal in detailsMeal" :key="meal.idMeal">
-      <div class="md:grid md:grid-cols-3 flex flex-col ">
-        <div class="p-10 w-full   ">
+
+    <div v-for="(meal,index) in detailsMeal" :key="meal.idMeal" :data-index="index" class="md:grid md:grid-cols-3 flex flex-col ">
+
+        <transition tag="div" class="w-full p-2" name="imgFade"  appear>
           <img :src="meal.strMealThumb" class="w-[400px] h-[400px] rounded shadow" :alt="meal.strMeal"/>
-        </div>
-        <div class="md:col-span-2  px-10">
+        </transition>
+        <transition tag="div" class="md:col-span-2  px-10" appear name="content">
           <div class="w-full">
             <h1 class="font-bold text-2xl">Title - {{ meal.strMeal }}</h1>
             <h1 class="font-semibold text-xl my-2">Category -#{{ meal.strCategory }}</h1>
@@ -21,13 +21,13 @@
             <h1 class="font-semibold text-xl">Instructions</h1>
             <p>{{ meal.strInstructions }}</p>
           </div>
-        </div>
-      </div>
+
+      </transition>
 
 
     </div>
 
-  </div>
+
 
 
 </template>
@@ -39,13 +39,46 @@ import {useMealStore} from "@/stores/meal";
 import {onMounted} from "vue";
 import {storeToRefs} from "pinia";
 import Button from "@/components/Button.vue";
+import gsap from "gsap"
 const mealStore = useMealStore();
 const route = useRoute();
 const id = ref(route.params.id)
 const {detailsMeal, Ingredient} = storeToRefs(mealStore)
+const beforeEnter =(el)=>{
+  el.style.opacit=0
+  el.style.transform = 'translateX(-60px)'
+}
+const enter=(el,done)=>{
+  gsap.to(el,{
+    duration:0.8,
+    opacity:1,
+    onComplete : done,
+    x:0,
+    delay:el.dataset.index * 0.2
+  })
+}
 
 onMounted(() => {
   mealStore.getDetailsMealById(id.value)
 })
 
 </script>
+
+<style scoped>
+.imgFade-enter-from{
+  opacity: 0;
+  transform: translateX(-100px);
+}
+.imgFade-enter-active{
+  transition: all 1s ease;
+}
+
+.content-enter-from{
+  opacity: 0;
+  transform: translateX(200px);
+}
+.content-enter-active{
+  transition: all 1s ease;
+}
+
+</style>

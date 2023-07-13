@@ -42,7 +42,7 @@ import heart from "vue-material-design-icons/Heart.vue"
 import {useMealStore} from "@/stores/meal";
 import Button from "@/components/Button.vue";
 import {storeToRefs} from "pinia";
-import {shortString} from "@/composibles/shortString";
+import {shortString} from "@/composables/shortString";
 
 const mealStore = useMealStore()
 const {AddToCartList, FavList,} = storeToRefs(mealStore)
