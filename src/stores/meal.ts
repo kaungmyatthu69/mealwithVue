@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import type {meal} from "@/types/Meal"
 import type {detailMeal} from "@/types/Meal";
 import type {category} from "@/types/Meal";
+import {axiosInstance, getAllMeals, getCategory} from "@/service/api.js"
 
 
 export const useMealStore = defineStore('mealStore', {
@@ -13,7 +14,7 @@ export const useMealStore = defineStore('mealStore', {
         Category: <category[]>[],
         SelectedCategory: '',
         searchbyName: '',
-        isOpenDrawer :<boolean> false
+        isOpenDrawer: <boolean>false
     }),
     getters: {
         Ingredient(state: any) {
@@ -26,41 +27,61 @@ export const useMealStore = defineStore('mealStore', {
             return ingredient;
         },
         getSomeMeals(state: any) {
-            if(state.meals?.length>8){
+            if (state.meals?.length > 8) {
                 return state.meals.slice(0, 8)
-            }else {
-                return  state.meals?.slice(0,state.meals.length+1)
+            } else {
+                return state.meals?.slice(0, state.meals.length + 1)
             }
         }
     },
     actions: {
         async getMeals() {
-            const res = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert');
-            const vegetarian = await res.json();
-            this.meals = vegetarian.meals
+            try {
+                const res = await getAllMeals;
+                this.meals = res.data.meals
+            } catch (e: any) {
+                console.log(e.message)
+            }
+
         },
         async getDetailsMealById(id: number | string) {
-            this.detailsMeal=[]
-            const res = await fetch("https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id)
-            const meal = await res.json();
-            this.detailsMeal = meal.meals
+            this.detailsMeal = []
+            try {
+                const res = await axiosInstance.get(`lookup.php?i=` + id)
+                this.detailsMeal = res.data.meals
+            } catch (e) {
+                console.log(e)
+            }
+
         },
         async getCategory() {
-            const res = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php");
-            const result = await res.json()
-            this.Category = result.categories
+            try {
+                const res = await getCategory;
+                this.Category = res.data.categories
+            } catch (e) {
+                console.log(e)
+            }
+
         },
         async getMealsByCategory(name: string) {
-            const res = await fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + name);
-            const result = await res.json();
-            this.meals = result.meals
-            this.SelectedCategory = name
+            try {
+                const res = await axiosInstance.get("filter.php?c=" + name);
+                this.meals = res.data.meals
+                this.SelectedCategory = name
+            } catch (e) {
+                console.log(e)
+            }
+
         },
         async searchByName(name: string) {
-            const res = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + name);
-            const result = await res.json();
-            this.meals = result.meals
-            this.searchbyName = ""
+            try {
+                const res = await axiosInstance.get("search.php?s=" + name);
+                this.meals = res.data.meals
+                this.searchbyName = ""
+            } catch (e) {
+                console.log(e)
+            }
+
         },
         AddToFav(meal: meal) {
             this.FavList.push(meal)
@@ -75,8 +96,8 @@ export const useMealStore = defineStore('mealStore', {
         RemoveFromCart(meal: meal) {
             this.AddToCartList = this.AddToCartList.filter((item: any) => item.idMeal !== meal.idMeal)
         },
-        toggleDrawer(){
-            this.isOpenDrawer= !this.isOpenDrawer
+        toggleDrawer() {
+            this.isOpenDrawer = !this.isOpenDrawer
         }
     }
 })

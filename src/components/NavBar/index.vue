@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky top-0 backdrop-blur border-b-2 z-20">
+  <div class="sticky top-0 backdrop-blur border-b-2 z-20 px-5">
     <div class="container mx-auto py-5 md:flex justify-between hidden ">
       <h1 class="text-amber-700">Hello </h1>
       <div class="flex justify-between items-center gap-10">
@@ -23,6 +23,8 @@
   <test/>
 </div>
 </template>
+
+
 <script setup lang="ts">
 
 import Cart from "vue-material-design-icons/Cart.vue"

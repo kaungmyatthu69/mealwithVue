@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="md:hidden " @click="mealStore.toggleDrawer()" >
+  <div class="md:hidden py-2 " @click="mealStore.toggleDrawer()" >
     <Menue v-if="!isOpenDrawer" />
     <Close v-if="isOpenDrawer" />
   </div>
