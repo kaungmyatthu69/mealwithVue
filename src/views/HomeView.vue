@@ -24,6 +24,11 @@ const mealStore = useMealStore()
 const {meals} = storeToRefs(mealStore)
 
 onMounted(() => {
-  mealStore.getMeals()
+  if(meals.value.length === 0){
+    mealStore.getMeals()
+
+  }
+
+
 })
 </script>

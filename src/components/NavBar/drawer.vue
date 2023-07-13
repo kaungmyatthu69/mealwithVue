@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <transition name="fade">
 
     <div v-if="isOpenDrawer " class="fixed top-0 left-0 md:hidden    h-full bg-black shadow w-72 z-30">
 
@@ -37,7 +37,7 @@
       </div>
 
     </div>
-  </div>
+  </transition>
 
 </template>
 
@@ -63,5 +63,21 @@ watch(()=>[categoryName.value,route.path],
 </script>
 
 <style scoped>
+.fade-enter-from
+{
+  opacity: 0;
+  transform: translateX(-400px);
+}
+.fade-enter-active{
+  transition: all 0.5s ease;
+}
+.fade-leave-to{
+  opacity: 0;
+  transform: translateX(-400px);
+}
+.fade-leave-active{
+
+  transition: all 0.5s ease-out;
+}
 
 </style>

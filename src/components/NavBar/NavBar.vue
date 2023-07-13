@@ -6,7 +6,7 @@
         <h1>Home</h1>
         <h1>Menu</h1>
         <router-link to="/favlist">
-          <div class="relative">Fav <span
+          <div ref="fav" class="relative">Fav <span
               class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-black  border-white rounded-full -top-2 -right-2 "> {{ FavList.length }}</span>
           </div>
         </router-link>
@@ -26,12 +26,34 @@
 <script setup lang="ts">
 
 import Cart from "vue-material-design-icons/Cart.vue"
-import Menue from  "vue-material-design-icons/Menu.vue"
+import gsap from "gsap";
 import {useMealStore} from "@/stores/meal";
 import {storeToRefs} from "pinia";
 import test from "@/components/NavBar/drawer.vue"
-import Close from "vue-material-design-icons/Close.vue"
 import MobileNav from "@/components/NavBar/MobileNav.vue";
+import {ref, watch} from "vue";
 const mealStore = useMealStore();
-const {FavList, AddToCartList,isOpenDrawer} = storeToRefs(mealStore)
+const {FavList, AddToCartList,} = storeToRefs(mealStore)
+const fav = ref(null)
+watch(()=>FavList.value.length,()=>{
+  gsap.fromTo(fav.value,{
+    duration:.2,
+    yoyo:true,
+    rotate:-20,
+
+  },{
+    duration:.2,
+    repeat:2,
+    yoyo:true,
+    rotate:20,
+    scale:1.125,
+    onComplete:()=>{
+      gsap.to(fav.value,{
+        rotate:0,
+        duration:.2,
+        scale:1
+      })
+    }
+  })
+})
 </script>
