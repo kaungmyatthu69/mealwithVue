@@ -26,12 +26,18 @@ import {Carousel, Navigation, Pagination, Slide} from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import type {meal} from "@/types/Meal";
 
-const props=defineProps({
-  CurouselData:{
-    require:true,
-    type:Array as meal[]
-  }
+
+
+const props = defineProps({
+ CurouselData:{
+   type:Array as ()=>meal[] ,
+   required:true
+ }
 })
 
 
+
 </script>
+
+
+
