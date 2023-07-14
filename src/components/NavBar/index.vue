@@ -9,7 +9,7 @@
           <div ref="fav" class="relative">Fav <span
               class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-black  border-white rounded-full -top-2 -right-2 "> {{ FavList.length }}</span>
           </div>
-        </router-link> .
+        </router-link>
         <div class="relative">
           <i class="fa-solid fa-cart-shopping"></i>
           <span

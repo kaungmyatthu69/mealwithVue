@@ -13,7 +13,7 @@
   </div>
 </transition>
    <transition  appear name="content">
-     <div class="md:col-span-2  px-7">
+     <div class="md:col-span-2  px-7 py-10 md:py-0">
        <div class="w-full">
          <h1 class="font-bold text-3xl">Title - {{ meal.strMeal }}</h1>
          <h1 class="font-semibold text-xl my-2">Category -#{{ meal.strCategory }}</h1>

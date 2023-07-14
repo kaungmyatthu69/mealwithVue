@@ -1,6 +1,6 @@
 <template>
-<div class="flex justify-between items-center px-2">
-  <div class="md:hidden py-2  " @click="mealStore.toggleDrawer()" >
+<div class="flex justify-between items-center px-2 md:hidden py-2">
+  <div class=" " @click="mealStore.toggleDrawer()" >
 
     <i class="fa-solid fa-bars text-xl" v-if="!isOpenDrawer"></i>
     <i class="fa-solid fa-xmark text-xl" v-if="isOpenDrawer"></i>
@@ -20,25 +20,6 @@ import gsap from "gsap";
 const mealStore = useMealStore()
 const {isOpenDrawer,FavList} = storeToRefs(mealStore)
 const fav = ref(null)
-// watch(()=>FavList.value.length,()=>{
-//   gsap.fromTo(fav.value,{
-//     duration:.2,
-//     yoyo:true,
-//     rotate:-20,
-//
-//   },{
-//     duration:.2,
-//     repeat:2,
-//     yoyo:true,
-//     rotate:20,
-//     scale:1.125,
-//     onComplete:()=>{
-//       gsap.to(fav.value,{
-//         rotate:0,
-//         duration:.2,
-//         scale:1
-//       })
-//     }
 watch(()=>FavList.value.length,()=>{
   gsap.fromTo(fav.value,{
     duration:.2,
