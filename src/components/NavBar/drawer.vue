@@ -6,7 +6,7 @@
       <div class="flex justify-between items-center">
         <h1 class="text-white">hello</h1>
         <button @click="mealStore.toggleDrawer()" class="p-4 text-white ">
-          <Close/>
+          <i class="fa-solid fa-xmark text-xl"></i>
         </button>
       </div>
       <hr/>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import Close from "vue-material-design-icons/Close.vue"
+
 
 import {useMealStore} from "@/stores/meal";
 import {storeToRefs} from "pinia";
@@ -51,28 +51,15 @@ const route = useRoute()
 const mealStore = useMealStore()
 const {isOpenDrawer, Category} = storeToRefs(mealStore)
 let categoryName = ref<String>('')
-watch(()=>categoryName.value,
-    () => {
-      console.log('lohello')
-      // mealStore.getMealsByCategory(categoryName.value)
-      // isOpenDrawer.value = false
+watch(()=>categoryName.value, () => {
+      mealStore.getMealsByCategory(categoryName.value)
+      isOpenDrawer.value = false
     }
 )
-// watch(()=>route.name,
-//     () => {
-//       console.log('Hello')
-//       mealStore.getMealsByCategory(categoryName.value)
-//       isOpenDrawer.value = false
-//     }
-// )
+watch(route,(to)=>{
+  isOpenDrawer.value = false},{flush:'pre',immediate:true,deep:true
+})
 
-watch(() => route.name, () => {
-  console.debug(`MyCoolComponent - watch route.name changed to ${route.name}`);
-  // Do something here...
-
-  // Optionally you can set immediate: true config for the watcher to run on init
-  //}, { immediate: true });
-});
 
 </script>
 

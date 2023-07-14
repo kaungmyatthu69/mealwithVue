@@ -11,7 +11,7 @@
           </div>
         </router-link>
         <div class="relative">
-          <Cart/>
+          <i class="fa-solid fa-cart-shopping"></i>
           <span
               class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-black  border-white rounded-full -top-2 -right-2 dark:border-gray-900">{{ AddToCartList.length }}</span>
         </div>
@@ -27,7 +27,6 @@
 
 <script setup lang="ts">
 
-import Cart from "vue-material-design-icons/Cart.vue"
 import gsap from "gsap";
 import {useMealStore} from "@/stores/meal";
 import {storeToRefs} from "pinia";

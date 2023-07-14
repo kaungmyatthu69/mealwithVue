@@ -8,9 +8,12 @@
       </div>
 
       <div class="flex justify-center flex-wrap gap-5 px-5 md:px-0 ">
-        <div v-for="(meal,index) in meals" :key="index"  class="w-[450px] md:w-[300px]" >
+        <div v-if="meals.length" v-for="(meal,index) in meals" :key="index"  class="w-[450px] md:w-[300px]" >
           <MealCart :meal="meal"/>
 
+        </div>
+        <div v-if="!meals.length">
+          NO
         </div>
       </div>
 

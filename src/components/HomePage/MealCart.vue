@@ -10,23 +10,22 @@
           </RouterLink>
         </div>
       </div>
-      <h1>{{shortString(meal.strMeal) }}</h1>
+      <h1>{{shortString(meal?.strMeal) }}</h1>
       <div class="flex justify-between items-center">
         <div>
-          <Button v-if="!isIncludeAddToCart(meal.idMeal) " @click="mealStore.AddToCart(meal)"
+          <Button v-if="!isIncludeAddToCart(meal?.idMeal) " @click="mealStore.AddToCart(meal)"
                   bg-clr="bg-green-400">Add To Cart
           </Button>
 
-          <Button v-if="isIncludeAddToCart(meal.idMeal)" @click="mealStore.RemoveFromCart(meal)"
+          <Button v-if="isIncludeAddToCart(meal?.idMeal)" @click="mealStore.RemoveFromCart(meal)"
                  bg-clr="bg-red-400">Remove From Cart
           </Button>
         </div>
 
         <div>
-          <heart-outline v-if="!isIncludeInFavList(meal.idMeal)" @click="mealStore.AddToFav(meal)"
-                         fill-color="red"/>
-          <heart v-if="isIncludeInFavList(meal.idMeal)" @click="mealStore.RemoveFromFav(meal)"
-                 fill-color="red"/>
+          <i class="fa-regular fa-heart text-xl  text-red-400"  v-if="!isIncludeInFavList(meal?.idMeal)"  @click="mealStore.AddToFav(meal)"  ></i>
+
+          <i class="fa-solid fa-heart text-xl text-red-400" v-if="isIncludeInFavList(meal?.idMeal)" @click="mealStore.RemoveFromFav(meal)"></i>
         </div>
 
       </div>
@@ -38,8 +37,6 @@
 <script setup lang="ts">
 import type {meal} from "@/types/Meal";
 import type {PropType} from "vue";
-import heartOutline from "vue-material-design-icons/HeartOutline.vue"
-import heart from "vue-material-design-icons/Heart.vue"
 import {useMealStore} from "@/stores/meal";
 import Button from "@/components/Button.vue";
 import {storeToRefs} from "pinia";
@@ -52,14 +49,19 @@ const props = defineProps({
   meal: Object as PropType<meal>
 
 })
+const isIncludeAddToCart = (id: string | undefined) => {
+  if(id){
+    return AddToCartList.value.find((item:meal )=> item.idMeal === id)
 
-const isIncludeAddToCart = (id: string) => {
-  return AddToCartList.value.find(item => item.idMeal === id)
+  }
 
 }
 
-const isIncludeInFavList = (id: string) => {
-  return FavList.value.find(item => item.idMeal === id)
+const isIncludeInFavList = (id: string | undefined ) => {
+  if(id){
+    return FavList.value.find((item:meal )=> item.idMeal === id)
+
+  }
 }
 
 </script>

@@ -7,10 +7,10 @@
 
     <div v-for="(meal,index) in detailsMeal" :key="meal.idMeal" :data-index="index" class="md:grid md:grid-cols-3 flex flex-col ">
 
-      <transition tag="div" class="w-full md:p-2 p-5 rounded " name="imgFade"  appear>
+      <transition-group tag="div" class="w-full md:p-2 p-5 rounded " name="imgFade"  appear>
         <img :src="meal.strMealThumb" class="w-[400px] h-[400px] rounded shadow" :alt="meal.strMeal"/>
-      </transition>
-      <transition tag="div" class="md:col-span-2  px-7" appear name="content">
+      </transition-group>
+      <transition-group tag="div" class="md:col-span-2  px-7" appear name="content">
         <div class="w-full">
           <h1 class="font-bold text-3xl">Title - {{ meal.strMeal }}</h1>
           <h1 class="font-semibold text-xl my-2">Category -#{{ meal.strCategory }}</h1>
@@ -23,7 +23,7 @@
           <p>{{ meal.strInstructions }}</p>
         </div>
 
-      </transition>
+      </transition-group>
 
 
     </div>
@@ -48,11 +48,11 @@ const mealStore = useMealStore();
 const route = useRoute();
 const id = ref(route.params.id)
 const {detailsMeal, Ingredient} = storeToRefs(mealStore)
-const beforeEnter =(el)=>{
+const beforeEnter =(el:any)=>{
   el.style.opacit=0
   el.style.transform = 'translateX(-60px)'
 }
-const enter=(el,done)=>{
+const enter=(el:any,done:any)=>{
   gsap.to(el,{
     duration:0.8,
     opacity:1,

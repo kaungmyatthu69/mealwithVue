@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import type {meal} from "@/types/Meal"
 import type {detailMeal} from "@/types/Meal";
 import type {category} from "@/types/Meal";
+// @ts-ignore
 import {axiosInstance, getAllMeals, getCategory} from "@/service/api.js"
 
 
@@ -44,7 +45,7 @@ export const useMealStore = defineStore('mealStore', {
             }
 
         },
-        async getDetailsMealById(id: number | string) {
+        async getDetailsMealById(id:any) {
             this.detailsMeal = []
             try {
                 const res = await axiosInstance.get(`lookup.php?i=` + id)
