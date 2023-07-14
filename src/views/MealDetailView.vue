@@ -1,29 +1,34 @@
 <template>
   <MainLayout>
-    <h1>Details</h1>
+<h1 class="text-3xl font-bold text-center mt-10">Meals Details </h1>
+
     <RouterLink :to="{name:'home'}">
-      <Button bg-clr="bg-green-400" >Back</Button>
+      <Button bg-clr="bg-red-400 my-10 ml-10 " >Back</Button>
     </RouterLink>
 
     <div v-for="(meal,index) in detailsMeal" :key="meal.idMeal" :data-index="index" class="md:grid md:grid-cols-3 flex flex-col ">
+<transition name="imgFade"  appear>
+  <div class="w-full md:p-2 p-5 rounded " >
+    <img :src="meal.strMealThumb" class="w-[400px] h-[400px] rounded shadow" :alt="meal.strMeal"/>
+  </div>
+</transition>
+   <transition  appear name="content">
+     <div class="md:col-span-2  px-7">
+       <div class="w-full">
+         <h1 class="font-bold text-3xl">Title - {{ meal.strMeal }}</h1>
+         <h1 class="font-semibold text-xl my-2">Category -#{{ meal.strCategory }}</h1>
+         <h1 class="font-semibold text-xl ">Ingredients</h1>
+         <div class="flex flex-wrap gap-3 my-3 md:w-[500px]">
+           <p v-for="(item,index) in Ingredient" :key="index" class="border rounded-lg py-1 px-2 shadow">
+             #{{ item }} </p>
+         </div>
+         <h1 class="font-semibold text-xl">Instructions</h1>
+         <p>{{ meal.strInstructions }}</p>
+       </div>
 
-      <transition-group tag="div" class="w-full md:p-2 p-5 rounded " name="imgFade"  appear>
-        <img :src="meal.strMealThumb" class="w-[400px] h-[400px] rounded shadow" :alt="meal.strMeal"/>
-      </transition-group>
-      <transition-group tag="div" class="md:col-span-2  px-7" appear name="content">
-        <div class="w-full">
-          <h1 class="font-bold text-3xl">Title - {{ meal.strMeal }}</h1>
-          <h1 class="font-semibold text-xl my-2">Category -#{{ meal.strCategory }}</h1>
-          <h1 class="font-semibold text-xl ">Ingredients</h1>
-          <div class="flex flex-wrap gap-3 my-3 md:w-[500px]">
-            <p v-for="(item,index) in Ingredient" :key="index" class="border rounded-lg py-1 px-2 shadow">
-              #{{ item }} </p>
-          </div>
-          <h1 class="font-semibold text-xl">Instructions</h1>
-          <p>{{ meal.strInstructions }}</p>
-        </div>
+     </div>
+   </transition>
 
-      </transition-group>
 
 
     </div>

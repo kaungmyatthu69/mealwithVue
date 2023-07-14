@@ -2,7 +2,7 @@
 
     <div class="  p-5 shadow rounded flex flex-col gap-2 w-full">
       <div class="group  relative">
-        <img :src="meal?.strMealThumb" :alt="meal?.strMeal" class="w-full h-60">
+        <img :src="meal?.strMealThumb" :alt="meal?.strMeal" class="w-full ">
         <div
             class="absolute top-0 left-0 w-full h-0 flex flex-col justify-center items-center bg-black opacity-0 group-hover:h-full group-hover:opacity-50 duration-500">
           <RouterLink :to="{name:'mealDetails',params:{id:meal?.idMeal}}">
