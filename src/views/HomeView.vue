@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-      <div v-if="meals.length">
+      <div v-if="meals?.length">
         <Herosection/>
         <h1 class="text-3xl font-bold text-center my-10"> Meals</h1>
         <div class="flex justify-center p-2 ">
