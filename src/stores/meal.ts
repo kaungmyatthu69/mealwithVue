@@ -75,6 +75,7 @@ export const useMealStore = defineStore('mealStore', {
 
         },
         async searchByName(name: string) {
+            this.meals=[]
             try {
                 const res = await axiosInstance.get("search.php?s=" + name);
                 this.meals = res.data.meals

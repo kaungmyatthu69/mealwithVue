@@ -1,15 +1,11 @@
 <template>
-
   <div class="my-5">
     <Curousel :CurouselData="getSomeMeals" />
-
-
   </div>
   <div class=" md:flex-col justify-center items-center mt-10 hidden md:flex">
     <h1 class="text-3xl font-bold">Categories</h1>
     <CategorySlide  />
   </div>
-
 
 </template>
 
