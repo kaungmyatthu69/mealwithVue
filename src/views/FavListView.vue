@@ -6,7 +6,7 @@
     </router-link>
     <transition name="switch" mode="out-in" >
       <div v-if="FavList.length">
-        <transition-group tag="div"  class="flex  px-5 flex-wrap justify-center md:justify-start items-center gap-5" name="list" appear>
+        <transition-group tag="div"  class="flex  px-3 flex-wrap justify-center md:justify-start items-center gap-3" name="list" appear>
           <div v-for="meal in FavList" :key="meal.idMeal"  class="w-[450px] md:w-[300px]">
             <MealCart :meal="meal"/>
           </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5">
+  <div class="my-5" v-if="!isNotFound" >
     <Curousel :CurouselData="getSomeMeals" />
   </div>
   <div class=" md:flex-col justify-center items-center mt-10 hidden md:flex">
@@ -17,7 +17,7 @@ import 'vue3-carousel/dist/carousel.css'
 import CategorySlide from "@/components/HomePage/CategorySlide.vue";
 import Curousel from "@/components/Curousel.vue";
 const mealStore = useMealStore();
-const {getSomeMeals} = storeToRefs(mealStore)
+const {getSomeMeals,isNotFound} = storeToRefs(mealStore)
 
 
 </script>

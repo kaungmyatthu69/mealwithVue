@@ -4,6 +4,7 @@ import type {detailMeal} from "@/types/Meal";
 import type {category} from "@/types/Meal";
 // @ts-ignore
 import {axiosInstance, getAllMeals, getCategory} from "@/service/api.js"
+import {useLoading} from "vue-loading-overlay";
 
 
 export const useMealStore = defineStore('mealStore', {
@@ -15,7 +16,9 @@ export const useMealStore = defineStore('mealStore', {
         Category: <category[]>[],
         SelectedCategory: '',
         searchbyName: '',
-        isOpenDrawer: <boolean>false
+        isOpenDrawer: <boolean>false,
+        isLoading:<boolean>true,
+        isNotFound:<boolean>false
     }),
     getters: {
         Ingredient(state: any) {
@@ -37,19 +40,42 @@ export const useMealStore = defineStore('mealStore', {
     },
     actions: {
         async getMeals() {
+            //loader
+            this.isLoading=true;
+            const loader= useLoading({
+                active:this.isLoading,
+                isFullPage:true,
+                loader:"dots"
+            })
+                const loading = loader.show()
+            //call api
             try {
                 const res = await getAllMeals;
                 this.meals = res.data.meals
+                this.isLoading=false;
+                loading.hide()
+
             } catch (e: any) {
                 console.log(e.message)
             }
 
         },
         async getDetailsMealById(id:any) {
+            //loader
+            this.isLoading=true;
+            const loader= useLoading({
+                active:this.isLoading,
+                isFullPage:true,
+                loader:"dots"
+            })
+            const loading = loader.show()
+            //call api
             this.detailsMeal = []
             try {
                 const res = await axiosInstance.get(`lookup.php?i=` + id)
                 this.detailsMeal = res.data.meals
+                this.isLoading=false
+                loading.hide()
             } catch (e) {
                 console.log(e)
             }
@@ -65,21 +91,49 @@ export const useMealStore = defineStore('mealStore', {
 
         },
         async getMealsByCategory(name: string) {
+            //loader
+            this.isLoading=true;
+            const loader= useLoading({
+                active:this.isLoading,
+                isFullPage:true,
+                loader:"dots"
+            })
+            const loading = loader.show()
+            //call api
+
             try {
                 const res = await axiosInstance.get("filter.php?c=" + name);
                 this.meals = res.data.meals
                 this.SelectedCategory = name
+                this.isLoading=false
+                loading.hide()
             } catch (e) {
                 console.log(e)
             }
 
         },
         async searchByName(name: string) {
+            //loader
+            this.isLoading=true;
+            const loader= useLoading({
+                active:this.isLoading,
+                isFullPage:true,
+                loader:"dots"
+            })
+            const loading = loader.show()
+            //call api
             this.meals=[]
             try {
                 const res = await axiosInstance.get("search.php?s=" + name);
                 this.meals = res.data.meals
-                this.searchbyName = ""
+
+                this.searchbyName = "";
+
+                this.isLoading=false
+                loading.hide()
+                if(!this.meals){
+                    this.isNotFound=true
+                }
             } catch (e) {
                 console.log(e)
             }
