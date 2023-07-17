@@ -3,11 +3,20 @@
     <div class="container mx-auto py-5 md:flex justify-between hidden ">
       <h1 class="text-amber-700">Hello </h1>
       <div class="flex justify-between items-center gap-10">
-        <h1 @click="$router.push(`/${li}`)" v-for="li in NavBarList" class="cursor-pointer" :class="{activeMenu:$route.name=== li}" >{{t(`navBar.${li}`)}} </h1>
+
+
+          <h1 @click="$router.push(`/${li}`)" v-for="li in NavBarList" class="cursor-pointer relative group" :class="{activeMenu:$route.name=== li}" >
+            {{t(`navBar.${li}`)}}
+            <span class="absolute -bottom-1 right-1/2 w-0 h-1 bg-red-400 group-hover:w-full   duration-500 group-hover:transition-all" style="border-radius: 2px 0 0 2px "></span>
+            <span class="absolute -bottom-1 left-1/2 w-0 h-1 bg-red-400 group-hover:w-full    duration-500 group-hover:transition-all" style="border-radius: 0 2px 2px 0"></span>
+          </h1>
+
+
         <router-link to="/favlist">
           <div ref="fav" class="relative">Fav <span
               class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-black  border-white rounded-full -top-2 -right-2 "> {{ FavList.length }}</span>
           </div>
+
         </router-link>
         <div class="relative">
           <i class="fa-solid fa-cart-shopping"></i>
@@ -31,10 +40,6 @@
 
 
 <script setup lang="ts">
-
-
-
-
 import gsap from "gsap";
 import {useMealStore} from "@/stores/meal";
 import {storeToRefs} from "pinia";

@@ -89,6 +89,7 @@ export const useMealStore = defineStore('mealStore', {
 
         },
         async getMealsByCategory(name: string) {
+            this.meals=[]
             //loader
             this.isLoading = true;
             const vueLoading = useLoading({
@@ -110,6 +111,7 @@ export const useMealStore = defineStore('mealStore', {
 
         },
         async searchByName(name: string) {
+            this.SelectedCategory=''
 
             //Loading
             this.isLoading=true;
