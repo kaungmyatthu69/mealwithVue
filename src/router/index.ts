@@ -7,6 +7,7 @@ import HomeView from '../views/HomeView.vue'
 import FavListView from "@/views/FavListView.vue";
 // @ts-ignore
 import MealDetailView from "@/views/MealDetailView.vue";
+import Menu from "@/views/Menu.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +18,10 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path:'/home',
+      redirect:'/'
+    },
+    {
       path:'/favlist',
       name:'favlist',
       component:FavListView
@@ -25,7 +30,13 @@ const router = createRouter({
       path:'/meals/:id',
       name:'mealDetails',
       component:MealDetailView
-    }
+    },
+    {
+      path:'/menu',
+      name:'menu',
+      component:Menu
+    },
+
   ]
 })
 

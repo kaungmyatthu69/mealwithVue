@@ -126,6 +126,8 @@ export const useMealStore = defineStore('mealStore', {
                 this.meals = res.data.meals
                 if(!this.meals){
                     this.notFound=true
+                }else {
+                    this.notFound=false
                 }
                 this.searchbyName = ""
                 this.isLoading=false
