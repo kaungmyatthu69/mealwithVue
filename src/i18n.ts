@@ -1,16 +1,15 @@
 // @ts-ignore
 import { createI18n } from 'vue-i18n';
 // @ts-ignore
-import type { LocaleMessages, VueMessageType} from "vue-i18n"
 import type { App, InjectionKey, Plugin } from 'vue';
 
 // Define the injection key
 export const i18nKey: InjectionKey<Plugin> = Symbol('i18n');
 
 // @ts-ignore
-import en from "@/locales/en.json";
+import en from "@/locales/en";
 // @ts-ignore
-import ch from "@/locales/ch.json";
+import ch from "@/locales/ch";
 // function loadLocaleMessages():LocaleMessages<VueMessageType>{
 //     const locales =[{en:en},{ch:ch}]
 //     const messages:LocaleMessages<VueMessageType> = {};

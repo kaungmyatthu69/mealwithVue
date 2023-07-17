@@ -3,7 +3,7 @@
     <div class="container mx-auto py-5 md:flex justify-between hidden ">
       <h1 class="text-amber-700">Hello </h1>
       <div class="flex justify-between items-center gap-10">
-        <h1 @click="$router.push(`/${li}`)" v-for="li in NavBarList" class="cursor-pointer" :class="{activeMenu:$route.name=== li}" >{{t(`${li}`)}} </h1>
+        <h1 @click="$router.push(`/${li}`)" v-for="li in NavBarList" class="cursor-pointer" :class="{activeMenu:$route.name=== li}" >{{t(`navBar.${li}`)}} </h1>
         <router-link to="/favlist">
           <div ref="fav" class="relative">Fav <span
               class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-black  border-white rounded-full -top-2 -right-2 "> {{ FavList.length }}</span>
